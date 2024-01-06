@@ -1,0 +1,27 @@
+---
+interface Props {
+  text: String;
+  big?: Boolean;
+  bold?: Boolean;
+}
+
+const { text, big, bold } = Astro.props;
+---
+
+{
+  big ? (
+    <button
+      class="bg-accent py-2 px-4 rounded-xl w-full"
+      class:list={bold ? "font-bold" : ""}
+    >
+      <span>{text}</span>
+    </button>
+  ) : (
+    <button
+      class="bg-accent py-2 px-4 rounded-xl"
+      class:list={bold ? "font-bold" : ""}
+    >
+      <span>{text}</span>
+    </button>
+  )
+}
