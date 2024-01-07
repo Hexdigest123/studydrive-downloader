@@ -1,0 +1,52 @@
+---
+import Link from "../../public/link.svg?raw";
+---
+
+<html lang="de-DE">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Study Drive Downloader</title>
+    <meta
+      name="description"
+      content="A convenient Study Drive file downloader. Download PDF, DOCX, and other file types from Study Drive with ease. Ideal for students."
+    />
+    <meta name="keywords" content="study drive download file pdf docx" />
+    <meta name="author" content="Hexdigest" />
+  </head>
+  <body class="bg-background text-primary_text">
+    <header class="p-4 bg-primary w-[95%] mx-auto mt-3 rounded-xl">
+      <h1 class="text-2xl md:text-3xl mb-1">Studydrive Downloader</h1>
+      <p class="text-secondary_text text-md md:text-xl">
+        This tool allows you to download any document listed on StudyDrive
+        completely for free.
+      </p>
+    </header>
+    <main class="min-h-screen">
+      <slot />
+    </main>
+    <footer class="bg-primary p-4">
+      <h1 class="text-xl md:text-3xl">Studydrive Downloader</h1>
+      <p class="text-secondary_text mb-4">
+        For legal notices or link blacklisting, please use the contact form.
+      </p>
+      <ul>
+        <li class="flex items-center gap-2">
+          <Fragment set:html={Link} />
+          <a href="https://github.com/Hexdigest123/studydrive-downloader"
+            >GitHub Repository</a
+          >
+        </li>
+        <li class="flex items-center gap-2">
+          <Fragment set:html={Link} />
+          <a href="/contact">Contact Form</a>
+        </li>
+      </ul>
+      <div class="flex justify-between mt-4">
+        <p>@Copyright 2023</p>
+        <p>Made by Hexdigest</p>
+      </div>
+    </footer>
+  </body>
+</html>

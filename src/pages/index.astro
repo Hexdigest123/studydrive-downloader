@@ -1,16 +1,76 @@
 ---
-
+import Default from "../layouts/default.astro";
+import BaseButton from "../components/BaseButton.astro";
+import FileNode from "../components/FileNode.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<script>
+  let fileNodes: Node[] = [];
+  let fileNodeContainer: HTMLElement | null = null;
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const fileNode = document.querySelector(".filenode");
+    fileNodeContainer = document.querySelector("#fileNodeContainer");
+
+    const addEventListenerToNode = (event: Event, fileNode: Node) => {
+      event.preventDefault();
+      var tempFileNode = fileNode.cloneNode(true);
+      var tempFileNodeInput = (tempFileNode as HTMLElement).children[1];
+      (tempFileNodeInput as HTMLInputElement).value = "";
+      (tempFileNode as HTMLElement).id = `filenode-${fileNodes.length}`;
+
+      tempFileNode.addEventListener("keydown", (event) => {
+        if ((event as KeyboardEvent).key === "Enter") {
+          addEventListenerToNode(event, tempFileNode);
+        } else if ((event as KeyboardEvent).key === "Backspace") {
+          if ((tempFileNodeInput as HTMLInputElement).value === "") {
+            fileNodeContainer?.removeChild(tempFileNode);
+          }
+        }
+      });
+
+      fileNodes.push(tempFileNode);
+      if (fileNodeContainer) fileNodeContainer.appendChild(tempFileNode);
+    };
+
+    if (fileNode && fileNodeContainer) {
+      fileNode.id = "filenode-0";
+      fileNode.addEventListener("keydown", (event) => {
+        if ((event as KeyboardEvent).key === "Enter") {
+          addEventListenerToNode(event, fileNode);
+        }
+      });
+      fileNodes.push(fileNode);
+    }
+  });
+</script>
+
+<Default>
+  <div class="bg-primary mt-4 w-[95%] mx-auto rounded-xl p-4">
+    <form>
+      <div
+        class="mb-4 grid grid-cols-1 grid-rows-1 gap-2"
+        id="fileNodeContainer"
+      >
+        <FileNode />
+      </div>
+      <div class="mb-4 flex justify-between items-center gap-2">
+        <input
+          type="checkbox"
+          class="w-5 h-5 bg-second border-none text-accent focus:ring-2 focus:ring-[rgba(255,255,255,0.6)] focus:appearance-none focus:border-none focus:ring-offset-0 focus:ring-offset-transparent"
+          id="checkbox"
+          required
+        />
+        <br />
+        <label for="checkbox" class="cursor-pointer">
+          I solemnly swear that I am a good noodle and subscribed to StudyDrive
+          Premium.
+        </label>
+      </div>
+    </form>
+
+    <BaseButton text={"Download File"} bold big />
+  </div>
+</Default>
+
+<style></style>
