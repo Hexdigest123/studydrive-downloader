@@ -2,6 +2,10 @@
 import Default from "../layouts/default.astro";
 import BaseButton from "../components/BaseButton.astro";
 import FileNode from "../components/FileNode.astro";
+import Stats from "../components/Stats.astro";
+
+const response = await fetch(`${Astro.url.origin}/api/stats`);
+const stats = await response.json();
 ---
 
 <script>
@@ -57,7 +61,7 @@ import FileNode from "../components/FileNode.astro";
       <div class="mb-4 flex justify-between items-center gap-2">
         <input
           type="checkbox"
-          class="w-5 h-5 bg-second border-none text-accent focus:ring-2 focus:ring-[rgba(255,255,255,0.6)] focus:appearance-none focus:border-none focus:ring-offset-0 focus:ring-offset-transparent"
+          class="w-5 h-5 text-primary bg-second border-none focus:ring-2 focus:ring-[rgba(255,255,255,0.6)] focus:appearance-none focus:border-none focus:ring-offset-0 focus:ring-offset-transparent"
           id="checkbox"
           required
         />
@@ -67,10 +71,15 @@ import FileNode from "../components/FileNode.astro";
           Premium.
         </label>
       </div>
-    </form>
 
-    <BaseButton text={"Download File"} bold big />
+      <BaseButton text={"Download File"} bold big />
+    </form>
+  </div>
+  <div class="bg-primary mt-4 w-[95%] mx-auto rounded-xl p-4">
+    <h1 class="text-center text-xl mb-4">Downloader Stats</h1>
+    <Stats stats={stats} />
+  </div>
+  <div class="bg-primary mt-4 w-[95%] mx-auto rounded-xl p-4">
+    <h1 class="text-center text-xl mb-4">Downloader Changelog</h1>
   </div>
 </Default>
-
-<style></style>
